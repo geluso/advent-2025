@@ -155,3 +155,20 @@ if !in(key_p1p2, seen) or !in(key_p2p1)
   seen.add(key_p2p1)
 end
 ```
+
+## Diagnose
+I got it running on sample input. There's a strange off by one error in my code
+I don't totally understand. Now it is failing on the full input.
+
+I see two sets with a size of 32 which makes me think a set is being duplicated.
+
+I need to write diagnostics to check for errors like points appearing in two sets.
+
+5 Set(Point3D[Point3D(33906, 74827, 44763), Point3D(32902, 80137, 48927), Point3D(29476, 83370, 54834), Point3D(26254, 84926, 50718), Point3D(31854, 77833, 46124)])
+
+32 Set(Point3D[Point3D(28333, 43215, 60441), Point3D(29309, 74428, 59292), Point3D(36312, 56652, 44995), Point3D(39485, 66336, 46700), Point3D(42431, 48059, 50199), Point3D(32768, 64861, 53281), Point3D(33906, 74827, 44763), Point3D(31221, 45763, 62189), Point3D(36753, 63743, 56727), Point3D(48081, 53061, 47906), Point3D(38299, 53075, 42916), Point3D(35174, 37902, 53105), Point3D(41303, 63531, 44129), Point3D(32902, 80137, 48927), Point3D(29030, 67785, 57422), Point3D(44778, 59153, 42937), Point3D(38433, 32008, 56477), Point3D(35610, 73912, 57411), Point3D(44162, 37238, 39726), Point3D(40468, 47875, 44230), Point3D(44481, 40817, 45796), Point3D(49279, 47297, 45921), Point3D(41847, 34653, 46201), Point3D(34792, 32397, 52435), Point3D(43402, 54653, 54507), Point3D(29949, 60475, 47884), Point3D(37085, 42809, 42029), Point3D(37040, 70215, 49411), Point3D(35350, 39786, 47859), Point3D(53509, 50234, 39909), Point3D(34146, 42819, 57323), Point3D(31854, 77833, 46124)])
+
+
+32 Set(Point3D[Point3D(24022, 82103, 15667), Point3D(31622, 82192, 34682), Point3D(25213, 80744, 42485), Point3D(33906, 74827, 44763), Point3D(14401, 85638, 42411), Point3D(33418, 76166, 24300), Point3D(29641, 76182, 22748), Point3D(32060, 69507, 26218), Point3D(30529, 84856, 21697), Point3D(18500, 76682, 35595), Point3D(23710, 94349, 24462), Point3D(22843, 88724, 27480), Point3D(32206, 75740, 31476), Point3D(22313, 94889, 26459), Point3D(26754, 79013, 47192), Point3D(32902, 80137, 48927), Point3D(23370, 78985, 32821), Point3D(29476, 83370, 54834), Point3D(27635, 86015, 20679), Point3D(22498, 93568, 17235), Point3D(13728, 70373, 42010), Point3D(28292, 80604, 18950), Point3D(23892, 88870, 31615), Point3D(21145, 86635, 17578), Point3D(26538, 80791, 27516), Point3D(14236, 74676, 44105), Point3D(22356, 84815, 15987), Point3D(28087, 90692, 35350), Point3D(20086, 80060, 43219), Point3D(32667, 78233, 15140), Point3D(26254, 84926, 50718), Point3D(31854, 77833, 46124)])
+
+Investigating `xx=31854`
