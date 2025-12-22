@@ -3,6 +3,7 @@ using Test
 include("./CharGrid.jl")
 
 lines = readlines("./CharGrid.test.txt")
+println(lines)
 grid = CharGrid(lines)
 
 @test grid.rows == 5
@@ -14,3 +15,6 @@ grid = CharGrid(lines)
 @test get_cell(grid, 99, 99) === nothing
 
 foreach((cell, row, col) -> println("$(cell) $(row) $(col)"), grid)
+
+set_cell(grid, 1, 1, 'P')
+@test get_cell(grid, 1, 1) == 'P'

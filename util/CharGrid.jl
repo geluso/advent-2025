@@ -1,3 +1,8 @@
+struct Coordinate
+  row::Int
+  col::Int
+end
+
 struct CharGrid
   rows::Int
   cols::Int
@@ -11,11 +16,31 @@ struct CharGrid
   end
 end
 
-function get_cell(grid::CharGrid, row::Int, col::Int)
+function is_valid_cell(grid::CharGrid, row::Int, col::Int)
   if row < 1 || col < 1 || row > grid.rows || col > grid.cols
-    return nothing
+    return false
+  end
+  return true
+end
+
+function get_cell(grid::CharGrid, row::Int, col::Int)
+  if !is_valid_cell(grid, row, col)
+    return
   end
   return grid.grid[row][col]
+end
+
+function set_cell(grid::CharGrid, coord::Coordinate)
+  set_cell(grid, coord.row, coord.col)
+end
+
+function set_cell(grid::CharGrid, row::Int, col::Int, char::Char)
+  if !is_valid_cell(grid, row, col)
+    return
+  end
+  letters = collect(grid.grid[row])
+  letters[col] = char
+  grid.grid[row] = String(letters)
 end
 
 function get_cell_neighbors(grid::CharGrid, row::Int, col::Int)
@@ -34,7 +59,7 @@ function get_cell_neighbors(grid::CharGrid, row::Int, col::Int)
   return neighbors
 end
 
-function foreach(ff::Function, grid::CharGrid)
+function Base.foreach(ff::Function, grid::CharGrid)
   for row in range(1, grid.rows)
     for col in range(1, grid.cols)
       cell = get_cell(grid, row, col)
