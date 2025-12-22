@@ -1,15 +1,22 @@
 function max_jolt(line)
-    max_jolt = 0
+    println(line)
     max_left = parse(Int, line[1])
     max_right = parse(Int, line[2])
-    for (index, character) in zip(range(1, length(line)), line)
-        println(index, ' ', character)
-        # Only update the left digit if there remains a right digit
-        if character > max_left && index < length(line)
-            max_left = parse(Int, character)
-            max_right = parse(Int, line[index + 1])
+    # Set up this loop offset by one so we can run to the and of the string and
+    # always be safely looking back by one
+    for index in range(2, length(line))
+        first_digit = parse(Int, line[index - 1])
+        second_digit = parse(Int, line[index])
+        println("max: $(max_left)$(max_right) $(first_digit) $(second_digit)")
+        if first_digit > max_left
+            max_left = first_digit
+            max_right = second_digit
+        elseif second_digit > max_right
+            max_right = second_digit
         end
     end
+    max_jolt = 10 * max_left + max_right
+    println(max_jolt, " ", line)
     return max_jolt
 end
 
@@ -23,5 +30,5 @@ function solve(filename)
     println(total_jolt)
 end
 
-filename = "sample.txt"
+filename = ARGS[1]
 solve(filename)
