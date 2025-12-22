@@ -2,7 +2,7 @@ using DataStructures
 
 include("Point3D.jl")
 
-function solve(filename::String, iterations::Int)
+function solve(filename::String, iterations::Int, is_part_one::Bool)
     file = open(filename, "r")
     lines = readlines(file)
 
@@ -25,10 +25,6 @@ function solve(filename::String, iterations::Int)
     connections = 0
 
     for p2p_dd in sorted_p2p_distances
-        if connections == iterations
-            break
-        end
-
         p1 = p2p_dd.p1
         p2 = p2p_dd.p2
 
@@ -59,20 +55,29 @@ function solve(filename::String, iterations::Int)
             push!(s2, p1)
             point_to_set[p1] = s2
         end
+
+        set = get(point_to_set, p1, nothing)
+        println(length(set), " items in set ($(length(lines)) lines)")
+        if length(set) == length(lines)
+            println(p1.xx * p2.xx)
+            break
+        end
     end
 
-    max_size_heap = MutableBinaryMaxHeap{Int}()
-    sets = values(point_to_set)
-    unique_sets = Set(sets)
-    for set in unique_sets
-        size = length(set)
-        push!(max_size_heap, size)
-    end
+    if is_part_one
+        max_size_heap = MutableBinaryMaxHeap{Int}()
+        sets = values(point_to_set)
+        unique_sets = Set(sets)
+        for set in unique_sets
+            size = length(set)
+            push!(max_size_heap, size)
+        end
 
-    size1 = pop!(max_size_heap)
-    size2 = pop!(max_size_heap)
-    size3 = pop!(max_size_heap)
-    println("$(size1 * size2 * size3) = $(size1) * $(size2) * $(size3)")
+        size1 = pop!(max_size_heap)
+        size2 = pop!(max_size_heap)
+        size3 = pop!(max_size_heap)
+        println("$(size1 * size2 * size3) = $(size1) * $(size2) * $(size3)")
+    end
 end
 
 filename = ARGS[1]
@@ -80,4 +85,4 @@ iterations = 10
 if occursin("input", filename)
     iterations = 1000
 end
-solve(filename, iterations)
+solve(filename, iterations, false)
