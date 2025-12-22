@@ -1,0 +1,63 @@
+316 Point3D(162, 817, 812) Point3D(425, 690, 689)
+321 Point3D(162, 817, 812) Point3D(431, 825, 988)
+322 Point3D(906, 360, 560) Point3D(805, 96, 715)
+328 Point3D(431, 825, 988) Point3D(425, 690, 689)
+333 Point3D(862, 61, 35) Point3D(984, 92, 344)
+338 Point3D(52, 470, 668) Point3D(117, 168, 530)
+344 Point3D(819, 987, 18) Point3D(941, 993, 340)
+347 Point3D(906, 360, 560) Point3D(739, 650, 466)
+350 Point3D(346, 949, 466) Point3D(425, 690, 689)
+352 Point3D(906, 360, 560) Point3D(984, 92, 344)
+367 Point3D(592, 479, 940) Point3D(425, 690, 689)
+
+01 162 425 CONNECT into A [162 425]
+02 162 431 CONNECT into A [162 425 431]
+03 906 805 CONNECT into B [906 805]
+__ 431 425 IGNORE already in A [162 425 431]
+04 862 984 CONNECT into C [862 984]
+05 052 117 CONNECT into D [052 117]
+06 819 941 CONNECT into E [819 941]
+07 906 739 CONNECT into B [906 805 739]
+08 346 425 CONNECT into A [162 425 431 346]
+09 906 984 MERGE B [906 805 739] and C [862 984] => F [906 805 739 862 984]
+10 592 425 CONNECT into A [162 425 431 346 592]
+
+5 A [162 425 431 346 592]
+5 F [906 805 739 862 984] (previously B [906 805 739 984] and C [862 984])
+2 D [052 117]
+2 E [819 941]
+
+I've ran my reasoning over and over and I think I have a confusion. Given the sample input I keep getting circuits of size 5, 5, and 2 instead of the circuits of size 5, 4, and 2 given in the example.
+
+Please see this reasoning and help me see where I'm wrong.
+
+    Distance (truncated to an int for simplicity), Point 1, Point 2
+    316 Point3D(162, 817, 812) Point3D(425, 690, 689)
+    321 Point3D(162, 817, 812) Point3D(431, 825, 988)
+    322 Point3D(906, 360, 560) Point3D(805, 96, 715)
+    328 Point3D(431, 825, 988) Point3D(425, 690, 689)
+    333 Point3D(862, 61, 35) Point3D(984, 92, 344)
+    338 Point3D(52, 470, 668) Point3D(117, 168, 530)
+    344 Point3D(819, 987, 18) Point3D(941, 993, 340)
+    347 Point3D(906, 360, 560) Point3D(739, 650, 466)
+    350 Point3D(346, 949, 466) Point3D(425, 690, 689)
+    352 Point3D(906, 360, 560) Point3D(984, 92, 344)
+    367 Point3D(592, 479, 940) Point3D(425, 690, 689)
+    
+    Number of Connections, Point 1 X, Point 2 X, action taken
+    01 162 425 CONNECT into A [162 425]
+    02 162 431 CONNECT into A [162 425 431]
+    03 906 805 CONNECT into B [906 805]
+    __ 431 425 IGNORE already in A [162 425 431]
+    04 862 984 CONNECT into C [862 984]
+    05 052 117 CONNECT into D [052 117]
+    06 819 941 CONNECT into E [819 941]
+    07 906 739 CONNECT into B [906 805 739]
+    08 346 425 CONNECT into A [162 425 431 346]
+    09 906 984 MERGE B [906 805 739] and C [862 984] => F [906 805 739 862 984]
+    10 592 425 CONNECT into A [162 425 431 346 592]
+    
+    5 A [162 425 431 346 592]
+    5 F [906 805 739 862 984] (previously B [906 805 739 984] and C [862 984])
+    2 D [052 117]
+    2 E [819 941]

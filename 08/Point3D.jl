@@ -4,17 +4,17 @@ struct Point3D
     zz::Int
 end
 
-function Base.isequal(p1::Point3D, p2::Point3D)
-  return p1.xx == p2.xx && p1.yy == p2.yy && p1.zz == p2.zz
-end
-
-function hash(pp::Point3D)
-  return hash("$(pp.xx),$(pp.yy),$(pp.zz)")
-end
-
-function point_to_key(pp::Point3D)
-  return "$(pp.xx),$(pp.yy),$(pp.zz)"
-end
+# function Base.isequal(p1::Point3D, p2::Point3D)
+  # return p1.xx == p2.xx && p1.yy == p2.yy && p1.zz == p2.zz
+# end
+# 
+# function hash(pp::Point3D)
+  # return hash("$(pp.xx),$(pp.yy),$(pp.zz)")
+# end
+# 
+# function point_to_key(pp::Point3D)
+  # return "$(pp.xx),$(pp.yy),$(pp.zz)"
+# end
 
 function distance(p1::Point3D, p2::Point3D)
     dx = p1.xx - p2.xx
